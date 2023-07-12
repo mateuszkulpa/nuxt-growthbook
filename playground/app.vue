@@ -1,10 +1,10 @@
 <template>
   <div>
-    <pre>{{ homeBannerFeature }}</pre>
+    <pre>{{ bannerEnabled }}</pre>
   </div>
 </template>
 
 <script setup lang="ts">
 const growthbook = useGrowthbook();
-const homeBannerFeature = growthbook.feature("home_banner");
+const bannerEnabled = growthbook.getFeatureValue("banner_enabled", false);
 </script>

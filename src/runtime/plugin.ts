@@ -7,6 +7,7 @@ export default defineNuxtPlugin(() => {
   } = useRuntimeConfig();
 
   const growthbook = new GrowthBook(growthbookOptions);
+
   return {
     provide: {
       growthbook,
