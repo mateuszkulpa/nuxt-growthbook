@@ -1,0 +1,50 @@
+{
+  "name": "nuxt-growthbook",
+  "version": "0.0.0",
+  "description": "Nuxt GrowthBook module",
+  "repository": "mateuszkulpa/nuxt-growthbook",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "dependencies": {
+    "@growthbook/growthbook": "^0.27.0",
+    "@nuxt/kit": "^3.6.2",
+    "defu": "^6.1.2"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxt/module-builder": "^0.4.0",
+    "@nuxt/schema": "^3.6.2",
+    "@nuxt/test-utils": "^3.6.2",
+    "@types/node": "^18.16.19",
+    "changelogen": "^0.5.4",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "nuxt": "^3.6.2",
+    "prettier": "^3.0.0",
+    "vitest": "^0.33.0"
+  }
+}
