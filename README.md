@@ -59,8 +59,8 @@ GROWTHBOOK_CLIENT_KEY=YOUR_CLIENT_KEY
 4. You can now use GrowthBook in your Nuxt app ✨
 ```vue
 <script setup>
-const growthbook = useGrowthbook();
-const bannerEnabled = growthbook.getFeatureValue("banner_enabled", false);
+const gb = useGrowthbook();
+const bannerEnabled = gb.isOn("banner_enabled");
 </script>
 ```
 ## Development
