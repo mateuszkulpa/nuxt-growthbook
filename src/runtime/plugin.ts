@@ -1,4 +1,9 @@
-import { defineNuxtPlugin, useRuntimeConfig, useFetch } from "#imports";
+import {
+  defineNuxtPlugin,
+  useRuntimeConfig,
+  useFetch,
+  createError,
+} from "#imports";
 import { GrowthBook } from "@growthbook/growthbook";
 import { FeatureDefinition } from "@growthbook/growthbook/src/types/growthbook";
 
@@ -7,7 +12,7 @@ export default defineNuxtPlugin(async () => {
     public: { growthbook: growthbookOptions },
   } = useRuntimeConfig();
   // TODO: handle caching with custom nitro endpoint
-  const { data } = await useFetch<{
+  const { data, error } = await useFetch<{
     features: Record<string, FeatureDefinition>;
   }>(
     `${growthbookOptions.apiHost}/api/features/${growthbookOptions.clientKey}`,
@@ -16,9 +21,11 @@ export default defineNuxtPlugin(async () => {
     },
   );
 
-  // TODO: handle error and throw exception based on module options
-
-  console.log(data.value?.features);
+  if (growthbookOptions.shouldThrowFetchingError && error.value) {
+    throw createError(
+      `Cannot fetch features from growthbook: ${error.value.message}`,
+    );
+  }
 
   const growthbook = new GrowthBook({
     features: data.value?.features ?? {},

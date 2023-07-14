@@ -8,9 +8,26 @@ import {
 import defu from "defu";
 
 export interface ModuleOptions {
+  /**
+   * The host URL of the GrowthBook API.
+   * @default "https://cdn.growthbook.io"
+   */
   apiHost: string;
+  /**
+   * Enables integration with GrowthBook DevTools.
+   * @default false
+   */
   enableDevMode: boolean;
+  /**
+   * GrowthBook Client Key.
+   */
   clientKey?: string;
+  /**
+   * Determines whether errors should be thrown when requests to the GrowthBook API fail.
+   * Enabling this option can be helpful if your application relies on the response from GrowthBook.
+   * @default false
+   */
+  shouldThrowFetchingError: boolean;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -21,6 +38,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: (nuxt) => ({
     apiHost: "https://cdn.growthbook.io",
     enableDevMode: nuxt.options.dev,
+    shouldThrowFetchingError: false,
   }),
   setup(options, nuxt) {
     const logger = useLogger("growthbook");
