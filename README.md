@@ -63,6 +63,16 @@ const gb = useGrowthbook();
 const bannerEnabled = gb.isOn("banner_enabled");
 </script>
 ```
+
+5. Optional: If you want to enable caching for GrowthBook API calls, use the `routeRules` option in your `nuxt.config.ts` file.
+```ts
+export default defineNuxtConfig({
+   routeRules: {
+     "/_growthbook/features": { swr: 60 },
+   },
+})
+```
+
 ## Development
 
 ```bash

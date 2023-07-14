@@ -5,17 +5,14 @@ import {
   createError,
 } from "#imports";
 import { GrowthBook } from "@growthbook/growthbook";
-import { FeatureDefinition } from "@growthbook/growthbook/src/types/growthbook";
+import { type FeatureDefinition } from "@growthbook/growthbook";
 
 export default defineNuxtPlugin(async () => {
   const {
     public: { growthbook: growthbookOptions },
   } = useRuntimeConfig();
-  // TODO: handle caching with custom nitro endpoint
-  const { data, error } = await useFetch<{
-    features: Record<string, FeatureDefinition>;
-  }>(
-    `${growthbookOptions.apiHost}/api/features/${growthbookOptions.clientKey}`,
+  const { data, error } = await useFetch<Record<string, FeatureDefinition>>(
+    "/_growthbook/features",
     {
       key: "growthbook:features",
     },
@@ -28,7 +25,7 @@ export default defineNuxtPlugin(async () => {
   }
 
   const growthbook = new GrowthBook({
-    features: data.value?.features ?? {},
+    features: data.value ?? {},
     enableDevMode: growthbookOptions.enableDevMode,
   });
 

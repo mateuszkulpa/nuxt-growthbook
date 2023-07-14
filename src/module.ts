@@ -4,6 +4,7 @@ import {
   createResolver,
   addImports,
   useLogger,
+  addServerHandler,
 } from "@nuxt/kit";
 import defu from "defu";
 
@@ -67,6 +68,10 @@ export default defineNuxtModule<ModuleOptions>({
       name: "useGrowthbook",
       as: "useGrowthbook",
       from: resolver.resolve("runtime/composables/useGrowthbook"),
+    });
+    addServerHandler({
+      route: "/_growthbook/features",
+      handler: resolver.resolve("runtime/nitro/features.get"),
     });
   },
 });
