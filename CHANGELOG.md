@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/mateuszkulpa/nuxt-growthbook/compare/v0.0.4...v0.0.5)
+
+### 🏡 Chore
+
+- Update dependencies ([18c85db](https://github.com/mateuszkulpa/nuxt-growthbook/commit/18c85db))
+- Update repository field in package.json ([cd5d69e](https://github.com/mateuszkulpa/nuxt-growthbook/commit/cd5d69e))
+
+### ❤️ Contributors
+
+- Mateusz Kulpa ([@mateuszkulpa](http://github.com/mateuszkulpa))
+
 ## v0.0.4
 
 [compare changes](https://undefined/undefined/compare/v0.0.3...v0.0.4)
