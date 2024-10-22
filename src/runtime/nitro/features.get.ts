@@ -1,17 +1,17 @@
-import { defineEventHandler } from "h3";
-import { useRuntimeConfig } from "#imports";
-import type { FeatureDefinition } from "@growthbook/growthbook";
+import { defineEventHandler } from 'h3'
+import type { FeatureDefinition } from '@growthbook/growthbook'
+import { useRuntimeConfig } from '#imports'
 
 export default defineEventHandler(async () => {
   const {
     public: { growthbook: growthbookOptions },
-  } = useRuntimeConfig();
+  } = useRuntimeConfig()
 
   const response = await $fetch<{
-    features: Record<string, FeatureDefinition>;
+    features: Record<string, FeatureDefinition>
   }>(
     `${growthbookOptions.apiHost}/api/features/${growthbookOptions.clientKey}`,
-  );
+  )
 
-  return response.features;
-});
+  return response.features
+})
