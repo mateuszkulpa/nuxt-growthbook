@@ -2,7 +2,10 @@
   "name": "nuxt-growthbook",
   "version": "0.0.4",
   "description": "Nuxt GrowthBook module",
-  "repository": "mateuszkulpa/nuxt-growthbook",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateuszkulpa/nuxt-growthbook.git"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
