@@ -64,14 +64,48 @@ const bannerEnabled = gb.isOn("banner_enabled");
 </script>
 ```
 
-5. Optional: If you want to enable caching for GrowthBook API calls, use the `routeRules` option in your `nuxt.config.ts` file.
+5. Optional: Enable real-time streaming updates
 ```ts
 export default defineNuxtConfig({
-   routeRules: {
-     "/_growthbook/features": { swr: 60 },
-   },
+  modules: ['nuxt-growthbook'],
+  growthbook: {
+    clientKey: 'YOUR_CLIENT_KEY',
+    streaming: true
+  }
 })
 ```
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+const gb = useGrowthbook()
+const bannerEnabled = ref(gb.isOn('banner_enabled'))
+
+gb.setRenderer(() => {
+  bannerEnabled.value = gb.isOn('banner_enabled')
+})
+</script>
+
+<template>
+  <div v-if="bannerEnabled">BANNER</div>
+</template>
+```
+
+## Configuration
+
+The GrowthBook module accepts the following configuration options in your `nuxt.config.ts` or via environment variables:
+
+| Option         | Type    | Description                                                       | Default                               |
+|----------------|---------|-------------------------------------------------------------------|---------------------------------------|
+| `apiHost`      | string  | The host URL of the GrowthBook API.                               | `https://cdn.growthbook.io`           |
+| `clientKey`    | string  | Your GrowthBook Client Key (can also be set via `GROWTHBOOK_CLIENT_KEY`). | (required)                            |
+| `enableDevMode`| boolean | Enables integration with GrowthBook DevTools in development.      | `nuxt.options.dev`                    |
+| `streaming`    | boolean | Enables real-time streaming updates of feature definitions.       | `false`                               |
+
+You can also configure the module using environment variables:
+
+- `GROWTHBOOK_CLIENT_KEY`: Sets the `clientKey`.
+- `GROWTHBOOK_API_HOST`: Sets the `apiHost`.
 
 ## Development
 

@@ -4,9 +4,19 @@ import {
   createResolver,
   addImports,
   useLogger,
-  addServerHandler,
 } from '@nuxt/kit'
 import defu from 'defu'
+
+declare module 'nuxt/schema' {
+  interface PublicRuntimeConfig {
+    growthbook: {
+      apiHost: string
+      clientKey: string
+      enableDevMode: boolean
+      streaming: boolean
+    }
+  }
+}
 
 export interface ModuleOptions {
   /**
@@ -24,11 +34,10 @@ export interface ModuleOptions {
    */
   clientKey?: string
   /**
-   * Determines whether errors should be thrown when requests to the GrowthBook API fail.
-   * Enabling this option can be helpful if your application relies on the response from GrowthBook.
+   * Enables real-time streaming updates (SSE) of feature definitions.
    * @default false
    */
-  shouldThrowFetchingError: boolean
+  streaming: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -39,7 +48,7 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: nuxt => ({
     apiHost: 'https://cdn.growthbook.io',
     enableDevMode: nuxt.options.dev,
-    shouldThrowFetchingError: false,
+    streaming: false,
   }),
   setup(options, nuxt) {
     const logger = useLogger('growthbook')
@@ -55,10 +64,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.runtimeConfig = defu(nuxt.options.runtimeConfig, {
       public: {
-        growthbook: defu(options, {
+        growthbook: {
           apiHost,
           clientKey,
-        }),
+          enableDevMode: options.enableDevMode,
+          streaming: options.streaming,
+        },
       },
     })
 
@@ -68,10 +79,6 @@ export default defineNuxtModule<ModuleOptions>({
       name: 'useGrowthbook',
       as: 'useGrowthbook',
       from: resolver.resolve('runtime/composables/useGrowthbook'),
-    })
-    addServerHandler({
-      route: '/_growthbook/features',
-      handler: resolver.resolve('runtime/nitro/features.get'),
     })
   },
 })

@@ -12,5 +12,9 @@
 
 <script setup lang="ts">
 const gb = useGrowthbook()
-const bannerEnabled = gb.isOn('banner_enabled')
+const bannerEnabled = ref(gb.isOn('banner_enabled'))
+
+gb.setRenderer(() => {
+  bannerEnabled.value = gb.isOn('banner_enabled')
+})
 </script>
