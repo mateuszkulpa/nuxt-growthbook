@@ -91,6 +91,21 @@ gb.setRenderer(() => {
 </template>
 ```
 
+## Server-side Integration
+
+You can also use GrowthBook in your server-side routes or middleware. For example, in a Nitro API route:
+
+```ts
+// server/api/feature.ts
+export default defineEventHandler(async (event) => {
+  const growthbook = await useGrowthbook()
+  const featureEnabled = growthbook.isOn('my_feature_flag')
+  return { featureEnabled }
+})
+```
+
+Streaming updates are only supported on the client; server-side calls fetch the latest flags on each request.
+
 ## Configuration
 
 The GrowthBook module accepts the following configuration options in your `nuxt.config.ts` or via environment variables:
