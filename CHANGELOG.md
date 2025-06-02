@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.1
+
+[compare changes](https://github.com/mateuszkulpa/nuxt-growthbook/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- Support server integration ([3eae793](https://github.com/mateuszkulpa/nuxt-growthbook/commit/3eae793))
+
+### ❤️ Contributors
+
+- Mateusz Kulpa ([@mateuszkulpa](https://github.com/mateuszkulpa))
+
 ## v0.1.0
 
 [compare changes](https://github.com/mateuszkulpa/nuxt-growthbook/compare/v0.0.5...v0.1.0)
