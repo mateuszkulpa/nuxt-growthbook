@@ -2,8 +2,9 @@ import {
   defineNuxtModule,
   addPlugin,
   createResolver,
-  addImports,
   useLogger,
+  addServerImportsDir,
+  addImportsDir,
 } from '@nuxt/kit'
 import defu from 'defu'
 
@@ -74,11 +75,9 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     const resolver = createResolver(import.meta.url)
-    addPlugin(resolver.resolve('./runtime/plugin'))
-    addImports({
-      name: 'useGrowthbook',
-      as: 'useGrowthbook',
-      from: resolver.resolve('runtime/composables/useGrowthbook'),
-    })
+
+    addPlugin(resolver.resolve('./runtime/client/plugin'))
+    addImportsDir(resolver.resolve('./runtime/client/composables'))
+    addServerImportsDir(resolver.resolve('./runtime/server/composables'))
   },
 })

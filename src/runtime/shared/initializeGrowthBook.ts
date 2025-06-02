@@ -1,10 +1,7 @@
 import { GrowthBook } from '@growthbook/growthbook'
-import {
-  defineNuxtPlugin,
-  useRuntimeConfig,
-} from '#imports'
+import { useRuntimeConfig } from '#imports'
 
-export default defineNuxtPlugin(async () => {
+export async function initializeGrowthBook(): Promise<GrowthBook> {
   const { public: { growthbook: options } } = useRuntimeConfig()
 
   const growthbook = new GrowthBook({
@@ -17,9 +14,5 @@ export default defineNuxtPlugin(async () => {
     streaming: import.meta.client && options.streaming,
   })
 
-  return {
-    provide: {
-      growthbook,
-    },
-  }
-})
+  return growthbook
+}
