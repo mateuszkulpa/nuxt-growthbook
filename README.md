@@ -24,13 +24,13 @@ Nuxt GrowthBook integration module.
 
 ```bash
 # Using pnpm
-pnpm add -D nuxt-growthbook
+pnpm add nuxt-growthbook
 
 # Using yarn
-yarn add --dev nuxt-growthbook
+yarn add nuxt-growthbook
 
 # Using npm
-npm install --save-dev nuxt-growthbook
+npm install nuxt-growthbook
 ```
 
 2. Add `nuxt-growthbook` to the `modules` section of `nuxt.config.ts`
